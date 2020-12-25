@@ -26,10 +26,17 @@ class Sprite(object):
     
     
 class Spark(Sprite):
+    skin_dim_x = 1
+    skin_dim_y = 1
     
     def __init__(self, position=(0,0), color=(255,0,0), dx=0, dy=0):
         self.position = position
-        self.skin = [(0,0): color]]
+        
+        self.skin = np.zeros([skin_dim_y, skin_dim_x, 3], dtype=np.uint8)
+        self.skin[0,0] = color
+
+        self.dx = dx
+        self.dy = dy
 
     def update_position(net_time):
         x, y = self.position
