@@ -8,4 +8,4 @@ def main():
     while True:
         loop()
 
-def setup()
+def loop()

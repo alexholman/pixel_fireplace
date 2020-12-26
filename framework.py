@@ -2,7 +2,7 @@
 
 import numpy as np
 
-RENDER_MODES = ('add', 'subtract', 'average')
+RENDER_MODES = ('add', 'subtract', 'overlay', 'average')
 
 class Controller(object):
     def __init__(self, display):
@@ -20,16 +20,20 @@ class Display(object):
         self.display_data = np.zeros([self.dim_y, self.dim_x, 3], dtype=np.uint8)
     
     def add_sprite(self, sprite, mode='add'):
-        sprite_pos_x, sprite_pos_y = sprite.position
         sprite_dim_y, sprite_dim_x = sprite.skin.shape
+        sprite_pos_x_end = sprite.pos_x + sprite_dim_x
+        sprite_pos_y_end = sprite.pos_y + sprite_dim_y
+        
         
         if mode == 'add':
-            pass
+            self.display_data[sprite.pos_y:sprite_pos_y_end, spite.pos_x:sprite_pos_x_end] += sprite.skin
         elif mode == 'subtract':
-            pass
+            self.display_data[sprite.pos_y:sprite_pos_y_end, spite.pos_x:sprite_pos_x_end] -= sprite.skin
+        elif mode == 'overlay':
+            self.display_data[sprite.pos_y:sprite_pos_y_end, spite.pos_x:sprite_pos_x_end] = sprite.skin
         elif mode == 'average':
             pass
-    
+
     def show(self):
         raise NotImplemented
 
